@@ -69,6 +69,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void delete(String slug) {
-
+        Article articleInDb = articlesRepo.getBySlug(slug);
+        articleInDb.setStatus(ArticleStatus.DELETED);
+        articlesRepo.save(articleInDb);
     }
 }
