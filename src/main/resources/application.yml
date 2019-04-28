@@ -20,11 +20,11 @@ error:
     enabled: true
 
 ## PROD
-#aws:
-#  accessKey: AKIAIVS7FGLWTQ3SUJGA
-#  secretKey: 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
-#  baseUrl: https://s3-eu-west-1.amazonaws.com
-#  bucket: easy-distinct-images
+aws:
+  accessKey: AKIAIVS7FGLWTQ3SUJGA
+  secretKey: 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
+  baseUrl: https://s3-eu-west-1.amazonaws.com
+  bucket: easy-distinct-images
 
 logging:
   level:
