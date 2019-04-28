@@ -60,7 +60,10 @@ public class User extends AbstractModel{
     private Set<UserRole> roles;
 
     @OneToMany(mappedBy = "writer" ,fetch = FetchType.LAZY)
-    private Set<Article> articles;
+    private Set<Article> writtenArticles;
+
+    @OneToMany(mappedBy = "editor" ,fetch = FetchType.LAZY)
+    private Set<Article> editedArticles;
 
     @OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
     private Profile profile;
@@ -132,12 +135,12 @@ public class User extends AbstractModel{
         this.roles = roles;
     }
 
-    public Set<Article> getArticles() {
-        return articles;
+    public Set<Article> getWrittenArticles() {
+        return writtenArticles;
     }
 
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
+    public void setWrittenArticles(Set<Article> writtenArticles) {
+        this.writtenArticles = writtenArticles;
     }
 
     public Profile getProfile() {
@@ -146,5 +149,13 @@ public class User extends AbstractModel{
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public Set<Article> getEditedArticles() {
+        return editedArticles;
+    }
+
+    public void setEditedArticles(Set<Article> editedArticles) {
+        this.editedArticles = editedArticles;
     }
 }

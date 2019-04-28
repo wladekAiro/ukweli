@@ -18,6 +18,8 @@ public class Article extends AbstractModel {
     private String body;
     @ManyToOne
     private User writer;
+    @ManyToOne
+    private User editor;
     @Enumerated(value = EnumType.STRING)
     private ArticleStatus status = ArticleStatus.PENDING;
 
@@ -78,5 +80,13 @@ public class Article extends AbstractModel {
 
     public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    public User getEditor() {
+        return editor;
+    }
+
+    public void setEditor(User editor) {
+        this.editor = editor;
     }
 }

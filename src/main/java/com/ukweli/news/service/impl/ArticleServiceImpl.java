@@ -10,7 +10,9 @@ import com.ukweli.news.utils.SlugUtil;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -40,12 +42,29 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<Article> getAllByStatus(ArticleStatus articleStatus, int page, int size) {
-        return null;
+        page = page -1;
+        return articlesRepo.getByStatus(articleStatus , new PageRequest(page,size));
     }
 
     @Override
-    public Article updateStatus(String slug, Article status) {
-        return null;
+    public Article updateStatus(String slug, ArticleStatus status) {
+
+        Article articleInDb = articlesRepo.getBySlug(slug);
+
+        if (!StringUtils.isEmpty(articleInDb)){
+
+            if (articleInDb.getStatus().equals(ArticleStatus.REVIEW) && status.equals(ArticleStatus.PUBLISHED)){
+                articleInDb.setEditor(userDetailsComponent.getLoggedInUser());
+                articleInDb.setStatus(status);
+            }
+
+            if (!status.equals(ArticleStatus.PUBLISHED))
+                articleInDb.setStatus(status);
+
+            articlesRepo.save(articleInDb);
+        }
+
+        return articleInDb;
     }
 
     @Override
