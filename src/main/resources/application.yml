@@ -1,0 +1,33 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ukweli_db
+    username: postgres
+    password: postgres
+  jpa: # JPA
+    database_platform: org.hibernate.dialect.PostgreSQLDialect
+    openInView: true
+    show-sql: false
+    database: POSTGRESQL
+    hibernate.ddl-auto: update
+  view:
+    prefix: /WEB-INF/jsp/
+    suffix: .jsp
+error:
+  whitelabel:
+    enabled: true
+
+## PROD
+#aws:
+#  accessKey: AKIAIVS7FGLWTQ3SUJGA
+#  secretKey: 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
+#  baseUrl: https://s3-eu-west-1.amazonaws.com
+#  bucket: easy-distinct-images
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    org.hibernate: INFO
+    com.distinct.shop: DEBUG
