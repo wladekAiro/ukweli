@@ -1,6 +1,7 @@
 package com.ukweli.news.domain;
 
 import com.ukweli.news.domain.enumeration.ArticleStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -19,6 +20,9 @@ public class Article extends AbstractModel {
     private User writer;
     @Enumerated(value = EnumType.STRING)
     private ArticleStatus status = ArticleStatus.PENDING;
+
+    @Transient
+    private MultipartFile image;
 
     public String getTitle() {
         return title;
@@ -66,5 +70,13 @@ public class Article extends AbstractModel {
 
     public void setStatus(ArticleStatus status) {
         this.status = status;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }
